@@ -42,10 +42,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'students.apps.StudentsConfig',
     'embed_video',
+    'debug_toolbar',
+
 
 ]
 
 MIDDLEWARE = [
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -54,6 +57,10 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+INTERNAL_IPS = [
+    '127.0.0.1',
+]   
 
 ROOT_URLCONF = 'elearn.urls'
 
@@ -131,3 +138,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.PyMemcacheCache',
+        'LOCATION': '127.0.0.1:11211',
+    }
+}
